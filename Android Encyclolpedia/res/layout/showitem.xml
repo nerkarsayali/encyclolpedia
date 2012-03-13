@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" 
+	android:layout_height="fill_parent"
+>
+	<LinearLayout
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+	  	android:gravity="center_horizontal"
+	  	android:orientation="vertical"
+	  	android:id="@+id/llShowItem"
+		android:padding="15px"
+	>
+ 
+ 		<LinearLayout
+	  		android:id="@+id/topll"
+		  	android:layout_width="fill_parent"
+		 	android:layout_height="fill_parent"
+		  	android:gravity="center"
+		  	android:orientation="horizontal"
+		>
+	  	</LinearLayout>
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="   "
+	        android:gravity="center_vertical"
+	    />
+	    
+	    <Button
+	    	android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Add to build"
+	        android:id="@+id/bAddBuild">
+	    </Button>
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="   "
+	        android:gravity="center_vertical"
+	        android:id="@+id/tvSpace"
+	    />
+	    
+	    <TextView
+	    	android:id="@+id/name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Name"
+	        android:gravity="center_vertical"
+	    />
+	    
+		<ImageView
+	    	android:id="@+id/icon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/icon" 
+	    />
+	    
+	    <TextView
+	    	android:id="@+id/fullprice"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Price"
+	        android:gravity="center_vertical"
+	    />
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="   "
+	        android:gravity="center_vertical"
+	    />
+	    
+	    <TextView
+	    	android:id="@+id/desc"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Desc"
+	        android:gravity="center"
+	    />
+	    
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="    "
+	        android:gravity="center_vertical"
+	    />
+	    
+	    <LinearLayout
+		  	android:layout_width="fill_parent"
+		 	android:layout_height="wrap_content"
+		  	android:gravity="center"
+		  	android:orientation="vertical"
+		>
+			<ImageView
+		    	android:id="@+id/icon2"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+	    	/>
+	    
+		    <TextView
+		    	android:id="@+id/price"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="center_vertical"
+		    />
+		    
+		    <TextView
+	        	android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content"
+	        	android:text="    "
+	        	android:gravity="center_vertical"
+	    	/>
+	    
+		    <LinearLayout
+		  		android:id="@+id/botll"
+			  	android:layout_width="fill_parent"
+			 	android:layout_height="wrap_content"
+			  	android:gravity="center"
+			  	android:orientation="horizontal"
+			>
+		  	</LinearLayout>
+		</LinearLayout>  
+	
+	</LinearLayout>
+</ScrollView>

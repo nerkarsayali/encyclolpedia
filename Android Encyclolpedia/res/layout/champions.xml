@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="fill_parent"
+	  	android:orientation="vertical"
+	  	android:id="@+id/mainll"
+	  	android:padding="15px"
+	>
+	<LinearLayout
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+	  	android:orientation="horizontal"
+	  	android:gravity="center"
+	>
+		<CheckBox 
+			    android:id="@+id/cbAll"
+			 	android:text="Show All"
+			 	android:layout_width="wrap_content"
+			 	android:layout_height="wrap_content"
+				/>	
+		<CheckBox 
+			    android:id="@+id/cbAssassin"
+			 	android:text="Assassin"
+			 	android:layout_width="wrap_content"
+			 	android:layout_height="wrap_content"
+				/>	
+		<CheckBox 
+			    android:id="@+id/cbFighter"
+			 	android:text="Fighter"
+			 	android:layout_width="wrap_content"
+			 	android:layout_height="wrap_content"
+				/>	
+	</LinearLayout>
+	
+	<LinearLayout
+	  	android:layout_width="fill_parent"
+	  	android:layout_height="wrap_content"
+	  	android:orientation="horizontal"
+	  	android:gravity="center"
+	>
+		<CheckBox 
+			    android:id="@+id/cbMage"
+			 	android:text="Mage"
+			 	android:layout_width="wrap_content"
+			 	android:layout_height="wrap_content"
+				/>	
+		<CheckBox 
+			    android:id="@+id/cbTank"
+			 	android:text="Tank"
+			 	android:layout_width="wrap_content"
+			 	android:layout_height="wrap_content"
+				/>	
+		<CheckBox 
+			    android:id="@+id/cbSupport"
+			 	android:text="Support"
+			 	android:layout_width="wrap_content"
+			 	android:layout_height="wrap_content"
+				/>	
+	</LinearLayout>
+	
+	<GridView xmlns:android="http://schemas.android.com/apk/res/android" 
+	    android:id="@+id/champions"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="fill_parent"
+	    android:numColumns="auto_fit"
+	    android:gravity="center"
+	/>
+</LinearLayout>
