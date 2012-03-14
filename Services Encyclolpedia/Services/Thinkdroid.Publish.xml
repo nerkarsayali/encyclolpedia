@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<publishData>
+  <publishProfile publishUrl="ftp://ftp.thinkdroid.eu" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profil1" publishMethod="FTP" replaceMatchingFiles="True" userName="think240037" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAX5kb+hKrEUK/1vov2jOQ6QAAAAACAAAAAAAQZgAAAAEAACAAAACNp115w1tRrQ/XB3FFWNYLC2S6qplmOI4a+mk6yh9xMAAAAAAOgAAAAAIAACAAAAA3O1mTayu2L8rxIHu4WJWTIZZ/Q4zRVu/xd8bhiFU8KiAAAACTVxy5NB6/Y6y7M/Kq2f7Cyp4Kgmi5WrHoRExxsjcIbEAAAABZYVbyZGY7jz0WKKxssoF/vPDkL9xJBHFN5nF0uv/Ur91aZ8jcjA43QlWxd/AdwCj0Wt2JA+FU0JZv6AM+gJLY" SelectedForPublish="True">
+    <file relUrl="Thinkdroid.csproj" publishTime="03/05/2011 18:18:48" />
+    <file relUrl="Web.config" publishTime="03/14/2012 20:39:33" />
+    <file relUrl="Web.Debug.config" publishTime="02/26/2011 21:47:13" />
+    <file relUrl="Service1.svc" publishTime="02/26/2011 22:13:58" />
+    <file relUrl="Properties/AssemblyInfo.cs" publishTime="02/26/2011 22:11:22" />
+    <file relUrl="bin/Thinkdroid.dll" publishTime="03/14/2012 20:39:31" />
+    <file relUrl="WebService1.asmx.cs" publishTime="03/14/2012 20:39:03" />
+    <file relUrl="bin/Thinkdroid.pdb" publishTime="03/14/2012 20:39:31" />
+    <file relUrl="Web.Release.config" publishTime="02/26/2011 21:47:13" />
+    <file relUrl="Service1.svc.cs" publishTime="02/26/2011 22:11:59" />
+    <file relUrl="WebService1.asmx" publishTime="03/05/2011 18:17:42" />
+    <file relUrl="Thinkdroid.csproj.user" publishTime="03/05/2011 18:18:48" />
+    <file relUrl="IService1.cs" publishTime="02/26/2011 22:11:57" />
+  </publishProfile>
+</publishData>

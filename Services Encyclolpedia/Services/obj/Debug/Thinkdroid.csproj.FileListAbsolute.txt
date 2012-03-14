@@ -1,0 +1,5 @@
+C:\Users\Viish\Mes Projets\C# - Services\Services\Services\bin\Thinkdroid.dll
+C:\Users\Viish\Mes Projets\C# - Services\Services\Services\bin\Thinkdroid.pdb
+C:\Users\Viish\Mes Projets\C# - Services\Services\Services\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Viish\Mes Projets\C# - Services\Services\Services\obj\Debug\Thinkdroid.dll
+C:\Users\Viish\Mes Projets\C# - Services\Services\Services\obj\Debug\Thinkdroid.pdb
