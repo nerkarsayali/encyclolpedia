@@ -13,10 +13,11 @@
 
     You should have received a copy of the GNU General Public License
     along with Encyclolpedia. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package com.apps.android.viish.encyclolpedia;
 
+import java.util.Iterator;
 import java.util.List;
 
 import android.app.Activity;
@@ -47,7 +48,7 @@ public class Encyclolpedia extends Activity
 {
 	public static final String	VERSION				= "0.1";
 
-	private static final String	TAG	= null;
+	private static final String	TAG					= null;
 
 	private ProgressDialog		mProgressDialog;
 	private Handler				mHandler			= new Handler()
@@ -55,28 +56,40 @@ public class Encyclolpedia extends Activity
 														public void handleMessage(
 																Message msg)
 														{
-															mProgressDialog
-																	.dismiss();
-
-															if (updateSuccessfull)
+															if (msg.obj == null)
 															{
-																Toast.makeText(
-																		Encyclolpedia.this,
-																		"Informations successfully updated!",
-																		Toast.LENGTH_SHORT)
-																		.show();
+																mProgressDialog
+																		.dismiss();
+
+																if (updateSuccessfull)
+																{
+																	Toast.makeText(
+																			Encyclolpedia.this,
+																			"Informations successfully updated!",
+																			Toast.LENGTH_SHORT)
+																			.show();
+																}
+																else
+																{
+																	Toast.makeText(
+																			Encyclolpedia.this,
+																			"Error, please try again later!",
+																			Toast.LENGTH_SHORT)
+																			.show();
+																}
 															}
 															else
 															{
-																Toast.makeText(
-																		Encyclolpedia.this,
-																		"Error, please try again later!",
-																		Toast.LENGTH_SHORT)
-																		.show();
+																mProgressDialog
+																		.setMessage("Downloading "
+																				+ msg.obj
+																						.toString()
+																				+ " ...");
 															}
 														}
 													};
 	private boolean				updateSuccessfull	= false;
+	private List<String>		mChampionsList;
 
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -85,7 +98,23 @@ public class Encyclolpedia extends Activity
 		setContentView(R.layout.menu);
 
 		assingActionsToMenuButtons();
-		updateInformations();
+
+		SharedPreferences lastSettings = getSharedPreferences("Preferences",
+				Context.MODE_PRIVATE);
+		String oldVersion = lastSettings.getString("Version", "0");
+
+		if (!oldVersion.equals(VERSION))
+		{
+			// Display a message to the user if it's the first time he launches
+			// the application
+			SharedPreferences.Editor editor = lastSettings.edit();
+			editor.clear();
+			editor.putString("Version", VERSION);
+			editor.commit();
+
+			showAbout();
+			updateInformations();
+		}
 	}
 
 	private void updateInformations()
@@ -109,6 +138,11 @@ public class Encyclolpedia extends Activity
 		{
 			public void run()
 			{
+				if (mChampionsList == null)
+				{
+					mChampionsList = WebServiceConnector
+							.getChampionsList(Encyclolpedia.this);
+				}
 				updateSuccessfull = downloadUpdates();
 				mHandler.sendEmptyMessage(0);
 			}
@@ -121,35 +155,82 @@ public class Encyclolpedia extends Activity
 		DatabaseStream dbs = new DatabaseStream(this);
 		try
 		{
-			List<String> champions = WebServiceConnector.getChampionsList(this);
-			for (String champion : champions)
+			Iterator<String> championIterator = mChampionsList.iterator();
+			while (championIterator.hasNext())
 			{
-				String championFileName = champion + ".jpg";
-				if (!ImageManager.isFileExists(this, championFileName)) {
-					Log.e(TAG, "Downloading picture " + championFileName);
-					ImageManager.downloadAndSaveImage(this, championFileName);
-				}
-				
-				int rev = WebServiceConnector.getChampionRevision(this,
-						champion);
-				Log.e(TAG, "Champion " + champion + " : latest revision = " + rev);
-				if (dbs.isEntryUpdatable(true, champion, rev))
+				String championRealName = championIterator.next();
+				// Download champion picture if needed
+				String champion = ImageManager
+						.getChampionFileName(championRealName);
+				String championFileName = champion + ".png";
+				mHandler.sendMessage(Message.obtain(mHandler, 0,
+						championRealName));
+				if (!ImageManager.isFileExists(this, championFileName))
 				{
-					Log.e(TAG, "Champion " + champion + " : updating...");
-					List<String> requests = WebServiceConnector.getChampionRequests(this, champion);
-					dbs.updateEntry(true, champion, requests);
-					Log.e(TAG, "Champion " + champion + " : updated");
+					Log.e(TAG, "Downloading champion picture "
+							+ championFileName);
+					ImageManager.downloadAndSaveChampionImage(this,
+							championFileName);
+					Log.e(TAG, "Downloaded champion picture "
+							+ championFileName);
 				}
+
+				// Download skill pictures if needed
+				String[] skillsLetters = new String[] { "P", "Q", "W", "E", "R" };
+				for (String skillLetter : skillsLetters)
+				{
+					String championSkillFileName = champion + skillLetter
+							+ ".png";
+					if (!ImageManager.isFileExists(this, championSkillFileName))
+					{
+						Log.e(TAG, "Downloading skill picture "
+								+ championSkillFileName);
+						ImageManager.downloadAndSaveSkillImage(this,
+								championSkillFileName);
+						Log.e(TAG, "Downloaded skill picture "
+								+ championSkillFileName);
+					}
+				}
+
+				// Download champions database if needed
+				int rev = WebServiceConnector.getChampionRevision(this,
+						championRealName);
+				Log.e(TAG, "Champion " + championRealName
+						+ " : latest revision = " + rev);
+				if (dbs.isEntryUpdatable(true, championRealName, rev))
+				{
+					Log.e(TAG, "Champion " + championRealName
+							+ " : updating...");
+					List<String> requests = WebServiceConnector
+							.getChampionRequests(this, championRealName);
+					dbs.updateEntry(true, champion, requests);
+					Log.e(TAG, "Champion " + championRealName + " : updated");
+				}
+
+				// Update complete, we remove him from the iterator
+				championIterator.remove();
 			}
-			//TODO : Items
+			// TODO : Items
 			ok = true;
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-		finally {
+		finally
+		{
 			dbs.close();
+
+			Button bUpdate = (Button) findViewById(R.id.bUpdate);
+			if (ok)
+			{
+				mChampionsList = null;
+				bUpdate.setText("Force Update");
+			}
+			else
+			{
+				bUpdate.setText("Finish Update");
+			}
 		}
 
 		return ok;
@@ -226,21 +307,5 @@ public class Encyclolpedia extends Activity
 				updateInformations();
 			}
 		});
-
-		SharedPreferences lastSettings = getSharedPreferences("Preferences",
-				Context.MODE_PRIVATE);
-		String oldVersion = lastSettings.getString("Version", "0");
-
-		if (!oldVersion.equals(VERSION))
-		{
-			// Display a message to the user if it's the first time he launches
-			// the application
-			SharedPreferences.Editor editor = lastSettings.edit();
-			editor.clear();
-			editor.putString("Version", VERSION);
-			editor.commit();
-
-			showAbout();
-		}
 	}
 }

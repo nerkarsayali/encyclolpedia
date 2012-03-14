@@ -42,9 +42,9 @@
 				android:orientation="vertical"
 	    		android:layout_gravity="center"
 				android:gravity="center">				
-				<Button android:text="Champions" android:id="@+id/bChamps" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@layout/button"></Button>
-				<Button android:text="Update" android:id="@+id/bUpdate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@layout/button"></Button>
-				<Button android:text="About" android:id="@+id/bAbout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@layout/button"></Button>
+				<Button android:text="Champions" android:id="@+id/bChamps" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FF000000" android:background="@layout/button"></Button>
+				<Button android:text="Force Update" android:id="@+id/bUpdate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FF000000" android:background="@layout/button"></Button>
+				<Button android:text="About" android:id="@+id/bAbout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="#FF000000" android:background="@layout/button"></Button>
 			</LinearLayout>
 
 			<LinearLayout android:id="@+id/LinearLayout01" android:layout_width="wrap_content" android:layout_height="fill_parent" android:gravity="bottom" android:layout_gravity="bottom|right">

@@ -34,7 +34,7 @@ public class DatabaseStream
 	public DatabaseStream(Context c)
 	{
 		context = c;
-		connector = new SQLiteConnector(context, "Encyclolpedia", 1);
+		connector = new SQLiteConnector(context, "Encyclolpedia", 3);
 		stream = connector.getWritableDatabase();
 	}
 
@@ -78,11 +78,11 @@ public class DatabaseStream
 		if (champion)
 		{
 			tables = new String[] { "Champions", "ChampionsTags",
-					"ChampionsSkills", "ChampionsRecommendedItems" };
+					"ChampionsSkills", "ChampionsRecommendedItems", "ChampionsStats" };
 		}
 		else
 		{
-			tables = new String[] { "Items", "ItemDependencies" };
+			tables = new String[] { "Items", "ItemsDependencies" };
 		}
 
 		try
@@ -138,7 +138,7 @@ public class DatabaseStream
 	{
 		String[] colonnes = { "Name" };
 
-		Cursor c = stream.query("ItemDependencies", colonnes, "Needed LIKE \""
+		Cursor c = stream.query("ItemsDependencies", colonnes, "Needed LIKE \""
 				+ name + "\"", null, null, null, "Name ASC");
 
 		return c;
@@ -148,7 +148,7 @@ public class DatabaseStream
 	{
 		String[] colonnes = { "Needed", "Amount" };
 
-		Cursor c = stream.query("ItemDependencies", colonnes, "Name LIKE \""
+		Cursor c = stream.query("ItemsDependencies", colonnes, "Name LIKE \""
 				+ name + "\"", null, null, null, "Name ASC");
 
 		return c;

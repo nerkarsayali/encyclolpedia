@@ -248,20 +248,21 @@ public class ShowChampion extends Activity implements OnClickListener
 			tvtags.setText(taglist);
 		tvtags.setTextColor(Color.BLACK);
 
-		// Skills
+		// Champion
 		try
 		{
-			Bitmap bm = ImageManager.getImage(this, name + ".jpg");
+			Bitmap bm = ImageManager.getImage(this, ImageManager.getChampionFileName(name) + ".png");
 			ivicon.setImageBitmap(bm);
 		}
 		catch (IOException e)
 		{
 			Log.i("Error", e.toString());
 		}
-
+		
+		// Skills
 		try
 		{
-			final Bitmap bm = ImageManager.getImage(this, name + " - " + skills[0] + ".gif");
+			final Bitmap bm = ImageManager.getImage(this, ImageManager.getChampionFileName(name) + "P.png");
 			skillicon0.setImageBitmap(bm);
 			skillicon0.setMaxWidth((getWindowManager().getDefaultDisplay()
 					.getWidth() - 30) / 5);
@@ -282,7 +283,7 @@ public class ShowChampion extends Activity implements OnClickListener
 
 		try
 		{
-			final Bitmap bm = ImageManager.getImage(this, name + " - " + skills[1] + ".gif");
+			final Bitmap bm = ImageManager.getImage(this, ImageManager.getChampionFileName(name) + "Q.png");
 			skillicon1.setImageBitmap(bm);
 			skillicon1.setMaxWidth((getWindowManager().getDefaultDisplay()
 					.getWidth() - 30) / 5);
@@ -303,7 +304,7 @@ public class ShowChampion extends Activity implements OnClickListener
 
 		try
 		{
-			final Bitmap bm = ImageManager.getImage(this, name + " - " + skills[2] + ".gif");
+			final Bitmap bm = ImageManager.getImage(this, ImageManager.getChampionFileName(name) + "W.png");
 			skillicon2.setImageBitmap(bm);
 			skillicon2.setMaxWidth((getWindowManager().getDefaultDisplay()
 					.getWidth() - 30) / 5);
@@ -324,7 +325,7 @@ public class ShowChampion extends Activity implements OnClickListener
 
 		try
 		{
-			final Bitmap bm = ImageManager.getImage(this, name + " - " + skills[3] + ".gif");
+			final Bitmap bm = ImageManager.getImage(this, ImageManager.getChampionFileName(name) + "E.png");
 			skillicon3.setImageBitmap(bm);
 			skillicon3.setMaxWidth((getWindowManager().getDefaultDisplay()
 					.getWidth() - 30) / 5);
@@ -345,7 +346,7 @@ public class ShowChampion extends Activity implements OnClickListener
 
 		try
 		{
-			final Bitmap bm = ImageManager.getImage(this, name + " - " + skills[4] + ".gif");
+			final Bitmap bm = ImageManager.getImage(this, ImageManager.getChampionFileName(name) + "R.png");
 			skillicon4.setImageBitmap(bm);
 			skillicon4.setMaxWidth((getWindowManager().getDefaultDisplay()
 					.getWidth() - 30) / 5);
@@ -381,7 +382,7 @@ public class ShowChampion extends Activity implements OnClickListener
 					.replace("-", "").toLowerCase();
 			try
 			{
-				Bitmap bm = ImageManager.getImage(this, itemName + ".gif");
+				Bitmap bm = ImageManager.getImage(this, itemName + ".png");
 				iv.setImageBitmap(bm);
 				iv.setAdjustViewBounds(true);
 				iv.setMaxWidth((getWindowManager().getDefaultDisplay()

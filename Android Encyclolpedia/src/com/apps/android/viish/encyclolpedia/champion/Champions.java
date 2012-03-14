@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,10 +44,11 @@ import android.widget.TextView;
 
 import com.apps.android.viish.encyclolpedia.R;
 import com.apps.android.viish.encyclolpedia.database.DatabaseStream;
+import com.apps.android.viish.encyclolpedia.tools.ImageManager;
 
 public class Champions extends Activity implements OnClickListener
 {
-	public static int	PICTURE_SIZE	= 80;
+	public static int	PICTURE_SIZE	= 120;
 
 	private ArrayList<String>	champs, tags;
 	private CheckBox			cbAll, cbAssassin, cbFighter, cbMage, cbTank,
@@ -278,8 +278,7 @@ class ImageAdapter extends BaseAdapter
 		try
 		{
 			iv = (ImageView) v.findViewById(R.id.icon_image);
-			Bitmap bm = BitmapFactory.decodeStream(mContext.getResources()
-					.getAssets().open(mThumbIds.get(position) + ".jpg"));
+			Bitmap bm = ImageManager.getImage(mContext, ImageManager.getChampionFileName(mThumbIds.get(position)) + ".png");
 			iv.setImageBitmap(bm);
 		}
 		catch (Exception e)

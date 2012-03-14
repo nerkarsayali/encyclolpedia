@@ -13,17 +13,21 @@
 
     You should have received a copy of the GNU General Public License
     along with Encyclolpedia. If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 package com.apps.android.viish.encyclolpedia.tools;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import org.apache.http.util.ByteArrayBuffer;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -31,13 +35,13 @@ import android.graphics.BitmapFactory;
 
 public class ImageManager
 {
-	public static final String BASE_URL = "http://thinkdroid.eu/encyclolpedia/images/";
-	
+	public static final String	BASE_URL	= "http://thinkdroid.eu/encyclolpedia/images/";
+
 	public static boolean isFileExists(Context context, String fileName)
 	{
 		try
 		{
-			FileInputStream fis = context.openFileInput(fileName);
+			FileInputStream fis = getFileInputStream(context, fileName);
 			fis.close();
 			return true;
 		}
@@ -46,37 +50,105 @@ public class ImageManager
 			return false;
 		}
 	}
-	
-	public static Bitmap getImage(Context context, String fileName) throws IOException {
-		FileInputStream fis = context.openFileInput(fileName);
-		Bitmap bm = BitmapFactory.decodeStream(fis);
-		fis.close();
-		
-		return bm;
-	}
-	
-	public static void downloadAndSaveImage(Context context, String fileName)
+
+	public static Bitmap getImage(Context context, String fileName)
 			throws IOException
 	{
-		String stringUrl = BASE_URL + fileName;
+		FileInputStream fis = getFileInputStream(context, fileName);
+		Bitmap bm = BitmapFactory.decodeStream(fis);
+		fis.close();
+
+		return bm;
+	}
+
+	public static void deleteImage(Context context, String fileName)
+	{
+		context.deleteFile(fileName);
+	}
+
+	public static void downloadAndSaveChampionImage(Context context,
+			String fileName) throws IOException
+	{
+		try
+		{
+			downloadAndSaveImageWithPrefix(context, "", fileName);
+		}
+		catch (IOException ioe)
+		{
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e1)
+			{
+				e1.printStackTrace();
+			}
+			downloadAndSaveImageWithPrefix(context, "", fileName);
+		}
+	}
+
+	public static void downloadAndSaveSkillImage(Context context,
+			String fileName) throws IOException
+	{
+		try
+		{
+			downloadAndSaveImageWithPrefix(context, "skills/", fileName);
+		}
+		catch (IOException ioe)
+		{
+			try
+			{
+				Thread.sleep(1000);
+			}
+			catch (InterruptedException e1)
+			{
+				e1.printStackTrace();
+			}
+			downloadAndSaveImageWithPrefix(context, "skills/", fileName);
+		}
+	}
+
+	private static void downloadAndSaveImageWithPrefix(Context context,
+			String prefix, String fileName) throws IOException
+	{
+		String stringUrl = BASE_URL + prefix + fileName;
 		URL url = new URL(stringUrl);
 		HttpURLConnection urlConnection = (HttpURLConnection) url
 				.openConnection();
-		urlConnection.setRequestMethod("GET");
-		urlConnection.setDoOutput(true);
-		urlConnection.connect();
-
-		FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
 		InputStream is = urlConnection.getInputStream();
 		BufferedInputStream bis = new BufferedInputStream(is);
-		byte[] buf = new byte[1024];
-		int n = 0;
-		int o = 0;
-		while ((n = bis.read(buf, o, buf.length)) != 0)
+		FileOutputStream fos = getFileOutputStream(context, fileName);
+
+		ByteArrayBuffer baf = new ByteArrayBuffer(65535);
+		int current = 0;
+		while ((current = bis.read()) != -1)
 		{
-			fos.write(buf, 0, n);
+			baf.append((byte) current);
 		}
-		bis.close();
+		fos.write(baf.toByteArray());
 		fos.close();
+		bis.close();
+	}
+
+	private static FileOutputStream getFileOutputStream(Context context,
+			String fileName) throws FileNotFoundException
+	{
+		File path = context.getExternalFilesDir(null);
+		File image = new File(path, fileName);
+		return new FileOutputStream(image);
+	}
+
+	private static FileInputStream getFileInputStream(Context context,
+			String fileName) throws FileNotFoundException
+	{
+		File path = context.getExternalFilesDir(null);
+		File image = new File(path, fileName);
+		return new FileInputStream(image);
+	}
+
+	public static String getChampionFileName(String championRealName)
+	{
+		return championRealName.replace("'", "").replace(" ", "")
+				.replace(".", "");
 	}
 }
