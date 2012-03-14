@@ -10,7 +10,6 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 public class WebServiceConnector
 {    
@@ -41,8 +40,7 @@ public class WebServiceConnector
         } 
 		catch (Exception e) 
 		{
-			Toast.makeText(context, "Can't get the current week's information. Please try again later.", Toast.LENGTH_LONG).show();
-			Log.e("Error", e.toString());
+			e.printStackTrace();
         }
 		
 		return champions;
@@ -75,8 +73,7 @@ public class WebServiceConnector
         } 
 		catch (Exception e) 
 		{
-			Toast.makeText(context, "Can't get the current week's information. Please try again later.", Toast.LENGTH_LONG).show();
-			Log.e("Error", e.toString());
+			e.printStackTrace();
         }
 		
 		return requests;
@@ -107,8 +104,7 @@ public class WebServiceConnector
         } 
 		catch (Exception e) 
 		{
-			Toast.makeText(context, "Can't get the current week's information. Please try again later.", Toast.LENGTH_LONG).show();
-			Log.e("Error", e.toString());
+			e.printStackTrace();
         }
 		
 		return revision;

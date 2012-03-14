@@ -101,9 +101,9 @@ public class Encyclolpedia extends Activity
 	private boolean downloadUpdates()
 	{
 		boolean ok = false;
+		DatabaseStream dbs = new DatabaseStream(this);
 		try
 		{
-			DatabaseStream dbs = new DatabaseStream(this);
 			List<String> champions = WebServiceConnector.getChampionsList(this);
 			for (String champion : champions)
 			{
@@ -130,6 +130,9 @@ public class Encyclolpedia extends Activity
 		catch (Exception e)
 		{
 			e.printStackTrace();
+		}
+		finally {
+			dbs.close();
 		}
 
 		return ok;
