@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import com.apps.android.viish.encyclolpedia.champion.Champions;
 import com.apps.android.viish.encyclolpedia.database.DatabaseStream;
-import com.apps.android.viish.encyclolpedia.database.ImageManager;
+import com.apps.android.viish.encyclolpedia.tools.ImageManager;
 import com.apps.android.viish.encyclolpedia.tools.WebServiceConnector;
 
 public class Encyclolpedia extends Activity

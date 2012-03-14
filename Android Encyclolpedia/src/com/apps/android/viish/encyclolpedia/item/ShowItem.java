@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import com.apps.android.viish.encyclolpedia.R;
 import com.apps.android.viish.encyclolpedia.database.DatabaseStream;
-import com.apps.android.viish.encyclolpedia.database.ImageManager;
+import com.apps.android.viish.encyclolpedia.tools.ImageManager;
 
 
 public class ShowItem extends Activity implements OnClickListener

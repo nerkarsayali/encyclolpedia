@@ -1,4 +1,4 @@
-package com.apps.android.viish.encyclolpedia.database;
+package com.apps.android.viish.encyclolpedia.tools;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
